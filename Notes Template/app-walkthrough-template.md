@@ -59,6 +59,8 @@ Recommend some stuff.
   * Data parsing librarries
 
   * xlwt - looks like perhaps we-re doing some exce/csv type stuff (think about csv injection)
+  * Static JS, JQuery, Bootstrap (is outdated)
+  * 
 
 * Datastore - Postgresql, MySQL, Memcache, Redis, Mongodb, etc.
     * MySQL
@@ -78,6 +80,10 @@ collaborative brainstorming improves risks, the better this list will be. (diver
 * Think about CSV injection and spreadsheet generation (xlwt)
 * Sensitive data with DoB (look for other things) - think about it in transit / rest.
 * Django version is out of date - look up for vulns
+---
+
+* VTM nginx - shows some interesting things. Let's look at that configuration.
+* Static JS / JQuery is old.
 
 ## Checklist of things to review
 
@@ -89,6 +95,16 @@ collaborative brainstorming improves risks, the better this list will be. (diver
 
 - [ ] .raw(), .execute()
 - [ ] `settings.py` and models maybe - look at MD5 usage
+- [ ] Find where uploads/downloads are happening (processing/access of files):
+  - [ ] Size
+  - [ ] Content / MIME type
+  - [ ] Zip/Tar?
+  - [ ] Permissioning/Authorization
+  - [ ] Location? Policy around that?
+- [ ] CSV Injection - look at validations / escaping routines
+- [ ] Look at how DoB is stored/processed (also, anything else sentivie?)
+- [ ] Lookup vulns in the various libs (including django) used by the app
+- [ ] Analyze ourr JQuery usage - probably out of date.
 
 ### Authentication
 - [ ] Login page give error messages, check for enumeration
