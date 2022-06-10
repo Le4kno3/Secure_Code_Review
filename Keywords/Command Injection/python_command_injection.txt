@@ -4,3 +4,7 @@ popen
 stdout
 stderr
 import os
+os
+exec
+import subprocess
+subprocess

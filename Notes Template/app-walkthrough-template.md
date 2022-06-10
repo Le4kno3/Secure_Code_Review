@@ -60,7 +60,7 @@ Recommend some stuff.
 
   * xlwt - looks like perhaps we-re doing some exce/csv type stuff (think about csv injection)
   * Static JS, JQuery, Bootstrap (is outdated)
-  * 
+  * Django.contrib.admin is used for administrative functionality
 
 * Datastore - Postgresql, MySQL, Memcache, Redis, Mongodb, etc.
     * MySQL
@@ -83,7 +83,11 @@ collaborative brainstorming improves risks, the better this list will be. (diver
 ---
 
 * VTM nginx - shows some interesting things. Let's look at that configuration.
-* Static JS / JQuery is old.
+* Static JS / JQuery / Bootstrap is old.
+* Font vulns that followed after JQuery vulns
+* Looks to be some juicy debug endpoints we should checkout.
+* OS level commands in technology stack (python)
+
 
 ## Checklist of things to review
 
@@ -105,6 +109,11 @@ collaborative brainstorming improves risks, the better this list will be. (diver
 - [ ] Look at how DoB is stored/processed (also, anything else sentivie?)
 - [ ] Lookup vulns in the various libs (including django) used by the app
 - [ ] Analyze ourr JQuery usage - probably out of date.
+- [ ] Look at and analyze the nginx config where we have allow origins wildcards stuff going on.
+- [ ] Checkout JQuery/Bootstrap version for vulns
+- [ ] Make sure @login_required is used sanely
+- [ ] import `os`, `subprocess`
+- [ ] need to look at unsafe html operations in this template language - django unsafe html methods.
 
 ### Authentication
 - [ ] Login page give error messages, check for enumeration
@@ -112,6 +121,10 @@ collaborative brainstorming improves risks, the better this list will be. (diver
 
 ### Authorization
 - [ ] Uses @login_required decorator, is it applied on all endpoints appropriately?
+
+- [ ] `@login_required` - built in django decorator - only checks for session but not true authorization.
+  * Interesting - it papears this decorator is stacked on top of user_passes_test - is that necessary? Is that a pattern we should repeat?
+- [ ] `@user_passes_test`
 
 ### Auditing/Logging
 - [ ] Logging configuration is in `settings.py`, check documentation for secure settings
@@ -134,6 +147,15 @@ collaborative brainstorming improves risks, the better this list will be. (diver
 
 - [ ] `ensure_logged_in`
 
+- [ ] `@login_required` - built in django decorator - only checks for session but not true authorization.
+  * Interesting - it papears this decorator is stacked on top of user_passes_test - is that necessary? Is that a pattern we should repeat?
+- [ ] `@user_passes_test`
+- [ ] `@csrf_exempt` - decorator marks a view as being exempt from the protection ensured by the middleware.
+
 ## Mapping / Files
 
 - [ ] /path/to/some/important/file.sh
+
+- [ ] urls.py
+- [ ] settings.py
+  * This thing seems super insecure - has a secret key, debug is on, simple loggin doesn't have a time, etc. - so let's spend some quality time with this file.
